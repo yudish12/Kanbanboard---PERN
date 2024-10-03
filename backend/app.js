@@ -6,6 +6,8 @@ const { authMiddleware } = require("./middlewares/auth");
 const globalErrorHandler = require("./middlewares/error");
 const db = require("./utils/db");
 const xss = require("xss-clean");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 const { User, Task } = require("./models");
 
 db.authenticate()

@@ -42,7 +42,6 @@ app.use(xss());
 app.use(helmet());
 
 // rate limiting
-const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 500, // Limit each IP to 100 requests per window(can be increased due to reordering api maybe it can be called many times)

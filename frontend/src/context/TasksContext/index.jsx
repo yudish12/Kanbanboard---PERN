@@ -7,12 +7,14 @@ import {
   reorderTaskApi,
   updateTaskApi,
 } from "./api";
+import { localStorageGet } from "../../utils/localstorage";
 
 export const TasksContext = createContext();
 
 const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = localStorageGet("user");
 
   const getTasks = async () => {
     const response = await getTasksApi();
@@ -132,6 +134,10 @@ const TasksProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    if (!token) {
+      setLoading(false);
+      return;
+    }
     getTasks();
   }, []);
 

@@ -35,7 +35,7 @@ const login = catchAsync(async (req, res, next) => {
     { email, first_name: user.first_name },
     process.env.JWT_SECRET
   );
-  return res.status(200).json({ token, user });
+  return res.status(200).json({ token, user, success: true });
 });
 
 const signup = catchAsync(async (req, res, next) => {
@@ -102,7 +102,7 @@ const googleAuth = catchAsync(async (req, res, next) => {
     { email: userRes.data.email, first_name: userRes.data.name },
     process.env.JWT_SECRET
   );
-  return res.status(200).json({ token, user: userData });
+  return res.status(200).json({ token, user: userData, success: true });
 });
 
 module.exports = { login, signup, getUser, googleAuth };

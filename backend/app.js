@@ -22,7 +22,15 @@ const app = express();
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
 
 app.use((req, res, next) => {
   req.reqTime = new Date().toISOString();

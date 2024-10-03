@@ -25,13 +25,15 @@ This is a Kanban board app built using React, Node.js, and Sequelize. It allows 
 - CORS
 - Google OAuth
 
+## Clone Repository
+```bash
+git clone https://github.com/yudish12/vashfoods-assignmen.git
+```
+
 ## Backend Setup
 
 ```bash
-# Clone the repository
-git clone https://github.com/vashfoods/kanban-board-tasks-management-app.git
-
-# Change directory to the project
+# Change directory to the backend project
 cd vashfoods-assignmen/backend
 
 # Install dependencies
@@ -65,10 +67,7 @@ node app.js
 ## Frontend Setup
 
 ```bash
-# Clone the repository
-git clone https://github.com/vashfoods/kanban-board-tasks-management-app.git
-
-# Change directory to the project
+# Change directory to the frontend project
 cd vashfoods-assignmen/frontend
 
 # Install dependencies

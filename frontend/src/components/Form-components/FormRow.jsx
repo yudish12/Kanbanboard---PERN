@@ -11,6 +11,7 @@ const FormRow = ({ type, name, value, handleChange, labelText }) => {
         value={value}
         id={name}
         name={name}
+        autoComplete="off"
         onChange={handleChange}
         className="form-input text-black"
       />

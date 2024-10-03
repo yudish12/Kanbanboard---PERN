@@ -28,7 +28,12 @@ export const loginApi = async (email, password) => {
         password: password,
       }),
     });
+    if (res.status !== 200) {
+      console.log("Error logging in");
+      return;
+    }
     const data = await res.json();
+    console.log(data);
     return { success: true, data };
   } catch (error) {
     return { success: false, error };
@@ -58,7 +63,7 @@ export const signupApi = async (email, password, first_name, last_name) => {
 
 export const googleAuth = async (code) => {
   try {
-    const res = await fetch(`${config.googleAuthUrl}?code=${code}`, {
+    const res = await fetch(`${config.googleAuthUrlProd}?code=${code}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

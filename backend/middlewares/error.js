@@ -7,6 +7,7 @@ module.exports = (err, req, res, next) => {
     const str = JSON.stringify(err.keyValue);
     return res.status(err.statusCode).json({
       status: err.status,
+      success: false,
       message: `Duplicated key value pair found ${str}`,
       obj: err.keyValue,
     });
@@ -15,6 +16,7 @@ module.exports = (err, req, res, next) => {
   //returns the error response in json to user
   return res.status(err.statusCode).json({
     status: err.status,
+    success: false,
     message: err.message,
   });
 };

@@ -4,6 +4,7 @@ import { getUserApi, loginApi, signupApi } from "./api";
 import { isEmail, isPassword } from "../../utils/validators";
 import { useGoogleLogin } from "@react-oauth/google";
 import { googleAuth } from "./api";
+import { toast } from "react-toastify";
 
 export const AuthContext = React.createContext();
 
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   // Signup Function
   const signupFunc = async (email, password, first_name, last_name) => {
     if (!isEmail(email) || !isPassword(password) || !first_name || !last_name) {
-      alert("Please enter all fields");
+      toast.error("Please enter valid fields");
       return;
     }
     const resp = await signupApi(email, password, first_name, last_name);
@@ -44,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   // Login Function
   const loginFunc = async (email, password) => {
     if (!isEmail(email) || !isPassword(password)) {
-      alert("Please enter email and password");
+      toast.error("Please enter valid email and password");
       return;
     }
     const resp = await loginApi(email, password);

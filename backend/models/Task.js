@@ -51,6 +51,6 @@ User.hasMany(Task, { foreignKey: "user_id" }); // A user can have many tasks
 Task.belongsTo(User, { foreignKey: "user_id" }); // A task belongs to a user
 
 // Sync the model to the database
-Task.sync({ alter: true });
+Task.sync();
 
 module.exports = Task;

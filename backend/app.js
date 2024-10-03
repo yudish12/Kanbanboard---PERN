@@ -5,6 +5,7 @@ const AppError = require("./utils/appError");
 const { authMiddleware } = require("./middlewares/auth");
 const globalErrorHandler = require("./middlewares/error");
 const db = require("./utils/db");
+const xss = require("xss-clean");
 const { User, Task } = require("./models");
 
 db.authenticate()
@@ -31,6 +32,20 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
+
+// clean xss inputs
+app.use(xss());
+
+//sets up various headers for protection from various attacks
+app.use(helmet());
+
+// rate limiting
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 500, // Limit each IP to 100 requests per window(can be increased due to reordering api maybe it can be called many times)
+});
+app.use(limiter);
 
 app.use((req, res, next) => {
   req.reqTime = new Date().toISOString();

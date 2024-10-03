@@ -29,7 +29,7 @@ This is a Kanban board app built using React, Node.js, and Sequelize. It allows 
 
 ```bash
 # Clone the repository
-git clone [https://github.com/vashfoods/kanban-board-tasks-management-app.git](https://github.com/yudish12/vashfoods-assignmen.git)
+git clone https://github.com/vashfoods/kanban-board-tasks-management-app.git
 
 # Change directory to the project
 cd vashfoods-assignmen/backend
@@ -66,7 +66,7 @@ node app.js
 
 ```bash
 # Clone the repository
-git clone [https://github.com/vashfoods/kanban-board-tasks-management-app.git](https://github.com/yudish12/vashfoods-assignmen.git)
+git clone https://github.com/vashfoods/kanban-board-tasks-management-app.git
 
 # Change directory to the project
 cd vashfoods-assignmen/frontend

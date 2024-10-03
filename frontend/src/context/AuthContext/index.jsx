@@ -18,9 +18,9 @@ export const AuthProvider = ({ children }) => {
   const getUser = useCallback(async () => {
     const resp = await getUserApi(token);
     if (!resp.success) {
-      alert("Error!! Please check logs");
+      toast.error(resp.error);
+      setLoading(false);
     }
-    console.log(resp);
     setUser(resp.data.data);
     setIsAuthenticated(true);
     setLoading(false);
@@ -28,18 +28,28 @@ export const AuthProvider = ({ children }) => {
 
   // Signup Function
   const signupFunc = async (email, password, first_name, last_name) => {
-    if (!isEmail(email) || !isPassword(password) || !first_name || !last_name) {
-      toast.error("Please enter valid fields");
+    if (!isEmail(email)) {
+      toast.error("Please enter a valid email");
+      return;
+    }
+    if (!isPassword(password)) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
+    if (!first_name || !last_name) {
+      toast.error("Please enter first name and last name");
       return;
     }
     const resp = await signupApi(email, password, first_name, last_name);
     if (!resp.success) {
-      alert("Error!! Please check logs");
+      toast.error(resp.error);
+      setLoading(false);
       return;
     }
     localStorageSet("user", resp.data.token);
     setUser(resp.data.user);
     setIsAuthenticated(true);
+    toast.success("Signup successful");
   };
 
   // Login Function
@@ -50,12 +60,14 @@ export const AuthProvider = ({ children }) => {
     }
     const resp = await loginApi(email, password);
     if (!resp.success) {
-      alert("Error!! Please check logs");
+      toast.error(resp.error);
+      setLoading(false);
       return;
     }
     localStorageSet("user", resp.data.token);
     setUser(resp.data.user);
     setIsAuthenticated(true);
+    toast.success("Logged in successfully");
   };
 
   // Logout Function
@@ -63,6 +75,7 @@ export const AuthProvider = ({ children }) => {
     localStorageSet("user", null);
     setUser(null);
     setIsAuthenticated(false);
+    toast.success("Logged out successfully");
   };
 
   // Google Login Function
@@ -71,12 +84,18 @@ export const AuthProvider = ({ children }) => {
       if (authResult["code"]) {
         console.log(authResult.code);
         const result = await googleAuth(authResult.code);
-        console.log(result);
+        if (!result.success) {
+          toast.error(result.error);
+          setLoading(false);
+          return;
+        }
         setUser(result.data.user);
         setIsAuthenticated(true);
         localStorageSet("user", result.data.token);
+        toast.success("Logged in successfully");
       } else {
         console.log(authResult);
+        toast.success("Logged in successfully");
         throw new Error(authResult);
       }
     } catch (e) {

@@ -9,6 +9,10 @@ export const getUserApi = async (token) => {
       },
     });
     const data = await res.json();
+    if (!data.success) {
+      console.log(data);
+      return { success: false, error: data.message };
+    }
     return { success: true, data };
   } catch (error) {
     console.log(error);
@@ -28,11 +32,11 @@ export const loginApi = async (email, password) => {
         password: password,
       }),
     });
-    if (res.status !== 200) {
-      console.log("Error logging in");
-      return;
-    }
     const data = await res.json();
+    if (!data.success) {
+      console.log(data);
+      return { success: false, error: data.message };
+    }
     console.log(data);
     return { success: true, data };
   } catch (error) {
@@ -55,6 +59,10 @@ export const signupApi = async (email, password, first_name, last_name) => {
       }),
     });
     const data = await res.json();
+    if (!data.success) {
+      console.log(data);
+      return { success: false, error: data.message };
+    }
     return { success: true, data };
   } catch (error) {
     return { success: false, error };
@@ -70,6 +78,10 @@ export const googleAuth = async (code) => {
       },
     });
     const data = await res.json();
+    if (!data.success) {
+      console.log(data);
+      return { success: false, error: data.message };
+    }
     return { success: true, data };
   } catch (error) {
     return { success: false, error };

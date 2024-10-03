@@ -30,10 +30,10 @@ export const addTaskApi = async (task) => {
       },
       body: JSON.stringify(task),
     });
-    if (res.status !== 200) {
-      throw new Error("Error adding task");
-    }
     const data = await res.json();
+    if (!data.success) {
+      return { success: false, error: data.message };
+    }
 
     return { success: true, data };
   } catch (error) {
@@ -53,10 +53,10 @@ export const updateTaskApi = async (task) => {
       },
       body: JSON.stringify(task),
     });
-    if (res.status !== 200) {
-      throw new Error("Error updating task");
-    }
     const data = await res.json();
+    if (!data.success) {
+      return { success: false, error: data.message };
+    }
     return { success: true, data };
   } catch (error) {
     console.log(error);
@@ -75,10 +75,10 @@ export const reorderTaskApi = async (payload) => {
       },
       body: JSON.stringify(payload),
     });
-    if (res.status !== 200) {
-      throw new Error("Error updating task");
-    }
     const data = await res.json();
+    if (!data.success) {
+      return { success: false, error: data.message };
+    }
     return { success: true, data };
   } catch (error) {
     console.log(error);
@@ -97,10 +97,10 @@ export const deleteTaskApi = async (taskId) => {
       },
       body: JSON.stringify({ id: taskId }),
     });
-    if (res.status !== 200) {
-      throw new Error("Error deleting task");
-    }
     const data = await res.json();
+    if (!data.success) {
+      return { success: false, error: data.message };
+    }
     return { success: true, data };
   } catch (error) {
     console.log(error);

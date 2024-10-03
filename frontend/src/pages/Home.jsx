@@ -5,6 +5,7 @@ import BoardForm from "../components/Kanban-board/board-form";
 import { useTaskContext } from "../context/hooks";
 import FullPageLoader from "../components/Layout/FullPageLoader";
 import { config } from "../config";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,9 +24,10 @@ const Home = () => {
     closeModal();
     const response = await addTask(formData);
     if (!response.success) {
-      alert("Error adding task!! check logs");
+      console.log(response.error);
+      toast.error(response.error);
     } else {
-      alert("Task added successfully");
+      toast.success("Task added successfully");
     }
   };
 

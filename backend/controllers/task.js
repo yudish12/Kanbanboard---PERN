@@ -19,7 +19,11 @@ const createTask = catchAsync(async (req, res, next) => {
 
   // Check if required fields are provided
   if (!title || !description || !status) {
-    const err = new AppError("Missing required fields", 400, "MISSING_FIELDS");
+    const err = new AppError(
+      "Missing one of the required fields, title, description, or status",
+      400,
+      "MISSING_FIELDS"
+    );
     return next(err);
   }
 
